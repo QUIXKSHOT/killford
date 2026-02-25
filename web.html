@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KILLFORD</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255,0,0,0.15), transparent 60%);
+    animation: pulse 6s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.logo {
+    height: 60px;
+    object-fit: contain;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: red;
+}
+
+nav h1 {
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: red;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: red;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-weight: 300;
+    opacity: 0.7;
+    position: relative; 
+    z-index: 2;
+}
+
+.hero-videos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-video {
+    position: absolute;
+    width: 600px;
+    top: 10%;
+    left: -50%; 
+    opacity: 0;
+    object-fit: cover;
+    animation: moveFade 60s linear infinite;
+}
+
+.hero-video:nth-child(1) { animation-delay: 0s; }
+.hero-video:nth-child(2) { animation-delay: 20s; }
+.hero-video:nth-child(3) { animation-delay: 40s; }
+
+@keyframes moveFade {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateX(120vw);
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(130vw);
+        opacity: 0;
+    }
+}
+
+.cta {
+    margin-top: 40px;
+    padding: 15px 40px;
+    border: 2px solid red;
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.cta:hover {
+    background: red;
+    box-shadow: 0 0 25px red;
+    transform: translateY(-5px);
+}
+
+.products {
+    padding: 150px 60px 100px;
+    text-align: center;
+}
+
+.products h3 {
+    font-size: 2rem;
+    margin-bottom: 60px;
+    letter-spacing: 3px;
+}
+
+.shopify-buy__product {
+    transition: 0.4s !important;
+}
+
+.shopify-buy__product:hover {
+    transform: scale(1.07) !important;
+    box-shadow: 0 0 30px rgba(255,0,0,0.7);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255,0,0,0.3);
+    opacity: 0.6;
+}
+
+footer .social-icons {
+    margin-top: 15px;
+    font-size: 32px;
+    display: inline-flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .social-icons a i {
+    color: white;
+    transition: transform 0.8s ease, color 0.8s ease, text-shadow 0.8s ease;
+}
+
+footer .social-icons a:hover i {
+    color: red;
+    transform: scale(1.5);
+    text-shadow: 0 0 15px red, 0 0 25px red;
+}
+
+.product-card {
+    display: inline-block;
+    background-color: #000000;
+    padding: 20px;
+    margin: 20px;
+    max-width: 300px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #000000;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product-card p {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.product-card:hover {
+    border-color: red;
+    box-shadow: 0 0 20px red;
+    transform: translateY(-5px);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="web.html" class="logo-link">
+        <img src="killfordd.png" alt="Minimal Logo" class="logo">
+    </a>
+    <div class="nav-links">
+        <a href="web.html">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#footer">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>KILLFORD</h2>
+    <p>Based, Pretty, Rich</p>
+    <button class="cta" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        SHOP NOW
+    </button>
+
+    <div class="hero-videos">
+        <video src="killford1.mp4" muted autoplay loop class="hero-video"></video>
+        <video src="killford2.mp4" muted autoplay loop class="hero-video"></video>
+        <video src="killford3.mp4" muted autoplay loop class="hero-video"></video>
+    </div>
+</section>
+
+<section class="products fade-in" id="shop">
+    <h3>FEATURED DROP</h3>
+
+    <a href="KILLFORD-Hooded-Sweatshirt.html" class="product-card">
+        <img src="kSweatshirt.jpg" alt="KILLFORD™ Hooded Sweatshirt">
+        <p>KILLFORD™ Hooded Sweatshirt</p>
+    </a>
+</section>
+
+
+<footer id="footer">
+    <p>© 2026 KILLFORD — All Rights Reserved</p>
+    <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+    </div>
+</footer>
+
+<script>
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.3 };
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+    });
+}, appearOptions);
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
+
+</body>
+</html>
